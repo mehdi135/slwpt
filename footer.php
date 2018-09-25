@@ -231,7 +231,7 @@
 <!-- Go To Top
 ============================================= -->
 <div id="gotoTop" class="icon-angle-up"></div>
-
+<?php wp_footer(); ?>
 <!-- External JavaScripts
 ============================================= -->
 <script type="text/javascript" src="<?php echo Asset::js('jquery.js'); ?>"></script>

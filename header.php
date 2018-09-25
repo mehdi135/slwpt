@@ -29,7 +29,6 @@
 
     <!-- Document Title
     ============================================= -->
-    <title>Home - Shop Layout 2 | Canvas</title>
 
 </head>
 
