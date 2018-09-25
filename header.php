@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="<?php echo Asset::css('fonts.css'); ?>" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <?php wp_head(); ?>
+
     <!-- Document Title
     ============================================= -->
     <title>Home - Shop Layout 2 | Canvas</title>
