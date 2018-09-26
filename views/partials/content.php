@@ -53,7 +53,9 @@
 
         </div>
 
-        <div class="promo parallax promo-full bottommargin-lg" style="background-image: url('<?php echo Asset::images('parallax/3.jpg') ?>');" data-stellar-background-ratio="0.4">
+        <div class="promo parallax promo-full bottommargin-lg"
+             style="background-image: url('<?php echo Asset::images('parallax/3.jpg') ?>');"
+             data-stellar-background-ratio="0.4">
             <div class="container clearfix">
                 <h3>Get <span>30%</span> off on orders of $29 or more. Use Coupon: <span>SHOP30</span></h3>
                 <span>Sale available on selected Designer Brands that include Apparels, Footwear, Fashion Accessories &amp; Watches.</span>
@@ -104,70 +106,107 @@
             <div class="col_one_third nobottommargin">
 
                 <div class="fancy-title title-border">
-                    <h4>Recently Arrived</h4>
+                    <h4>آخرین محصولات</h4>
+                    <!--                    Recently Arrived-->
                 </div>
 
                 <div>
-
-                    <div class="spost clearfix">
-                        <div class="entry-image">
-                            <a href="#"><img src="<?php echo Asset::images('shop/small/1.jpg'); ?>" alt="Image"></a>
-                        </div>
-                        <div class="entry-c">
-                            <div class="entry-title">
-                                <h4><a href="#">Blue Round-Neck Tshirt</a></h4>
+                    <?php $new_products = new WP_Query(array(
+                        'post_type' => 'product',
+                        'order'     => 'DESC',
+                        'orderby' => 'meta_value_num',
+                        'meta_key' => Product::PRICE_META_KEY
+                    )); ?>
+                    <?php if ($new_products->have_posts()): ?>
+                        <?php while ($new_products->have_posts()): $new_products->the_post(); ?>
+                            <div class="spost clearfix">
+                                <div class="entry-image">
+                                    <a href="#"><img src="<?php echo Asset::images('shop/small/1.jpg'); ?>" alt="Image"></a>
+                                </div>
+                                <div class="entry-c">
+                                    <div class="entry-title">
+                                        <h4><a href="#"><?php echo get_the_title(); ?></a></h4>
+                                    </div>
+                                    <ul class="entry-meta">
+                                        <li class="color"><?php echo Product::price(get_the_ID()); ?></li>
+                                        <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                                    class="icon-star3"></i> <i
+                                                    class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <ul class="entry-meta">
-                                <li class="color">$29.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
-                            </ul>
-                        </div>
-                    </div>
+                        <?php endwhile; ?>
 
-                    <div class="spost clearfix">
-                        <div class="entry-image">
-                            <a href="#"><img src="<?php echo Asset::images('shop/small/6.jpg'); ?>" alt="Image"></a>
-                        </div>
-                        <div class="entry-c">
-                            <div class="entry-title">
-                                <h4><a href="#">Checked Short Dress</a></h4>
-                            </div>
-                            <ul class="entry-meta">
-                                <li class="color">$23.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i> <i class="icon-star-empty"></i></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <?php else: ?>
 
-                    <div class="spost clearfix">
-                        <div class="entry-image">
-                            <a href="#"><img src="<?php echo Asset::images('shop/small/7.jpg'); ?>" alt="Image"></a>
-                        </div>
-                        <div class="entry-c">
-                            <div class="entry-title">
-                                <h4><a href="#">Light Blue Denim Dress</a></h4>
-                            </div>
-                            <ul class="entry-meta">
-                                <li class="color">$19.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="spost clearfix">
-                        <div class="entry-image">
-                            <a href="#"><img src="<?php echo Asset::images('shop/small/9.jpg'); ?>" alt="Image"></a>
-                        </div>
-                        <div class="entry-c">
-                            <div class="entry-title">
-                                <h4><a href="#">Slim Fit Chinos</a></h4>
-                            </div>
-                            <ul class="entry-meta">
-                                <li class="color">$24.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-empty"></i></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <?php endIf ?>
+                    <!--                    <div class="spost clearfix">-->
+                    <!--                        <div class="entry-image">-->
+                    <!--                            <a href="#"><img src="-->
+                    <?php //echo Asset::images('shop/small/1.jpg'); ?><!--" alt="Image"></a>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="entry-c">-->
+                    <!--                            <div class="entry-title">-->
+                    <!--                                <h4><a href="#">Blue Round-Neck Tshirt</a></h4>-->
+                    <!--                            </div>-->
+                    <!--                            <ul class="entry-meta">-->
+                    <!--                                <li class="color">$29.99</li>-->
+                    <!--                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i-->
+                    <!--                                            class="icon-star3"></i> <i class="icon-star-half-full"></i></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!---->
+                    <!--                    <div class="spost clearfix">-->
+                    <!--                        <div class="entry-image">-->
+                    <!--                            <a href="#"><img src="-->
+                    <?php //echo Asset::images('shop/small/6.jpg'); ?><!--" alt="Image"></a>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="entry-c">-->
+                    <!--                            <div class="entry-title">-->
+                    <!--                                <h4><a href="#">Checked Short Dress</a></h4>-->
+                    <!--                            </div>-->
+                    <!--                            <ul class="entry-meta">-->
+                    <!--                                <li class="color">$23.99</li>-->
+                    <!--                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i-->
+                    <!--                                            class="icon-star-half-full"></i> <i class="icon-star-empty"></i></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!---->
+                    <!--                    <div class="spost clearfix">-->
+                    <!--                        <div class="entry-image">-->
+                    <!--                            <a href="#"><img src="-->
+                    <?php //echo Asset::images('shop/small/7.jpg'); ?><!--" alt="Image"></a>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="entry-c">-->
+                    <!--                            <div class="entry-title">-->
+                    <!--                                <h4><a href="#">Light Blue Denim Dress</a></h4>-->
+                    <!--                            </div>-->
+                    <!--                            <ul class="entry-meta">-->
+                    <!--                                <li class="color">$19.99</li>-->
+                    <!--                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i-->
+                    <!--                                            class="icon-star-empty"></i> <i class="icon-star-empty"></i></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!---->
+                    <!--                    <div class="spost clearfix">-->
+                    <!--                        <div class="entry-image">-->
+                    <!--                            <a href="#"><img src="-->
+                    <?php //echo Asset::images('shop/small/9.jpg'); ?><!--" alt="Image"></a>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="entry-c">-->
+                    <!--                            <div class="entry-title">-->
+                    <!--                                <h4><a href="#">Slim Fit Chinos</a></h4>-->
+                    <!--                            </div>-->
+                    <!--                            <ul class="entry-meta">-->
+                    <!--                                <li class="color">$24.99</li>-->
+                    <!--                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i-->
+                    <!--                                            class="icon-star3"></i> <i class="icon-star-empty"></i></li>-->
+                    <!--                            </ul>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
 
                 </div>
 
@@ -191,7 +230,8 @@
                             </div>
                             <ul class="entry-meta">
                                 <li class="color">$15</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i></li>
+                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                            class="icon-star3"></i> <i class="icon-star3"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -206,7 +246,9 @@
                             </div>
                             <ul class="entry-meta">
                                 <li class="color">$19</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></li>
+                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                            class="icon-star-empty"></i> <i class="icon-star-empty"></i> <i
+                                            class="icon-star-empty"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -221,7 +263,8 @@
                             </div>
                             <ul class="entry-meta">
                                 <li class="color">$34.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i> <i class="icon-star-empty"></i></li>
+                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                            class="icon-star-half-full"></i> <i class="icon-star-empty"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -236,7 +279,8 @@
                             </div>
                             <ul class="entry-meta">
                                 <li class="color">$17.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
+                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                            class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -263,7 +307,8 @@
                             </div>
                             <ul class="entry-meta">
                                 <li class="color">$21</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
+                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                            class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -278,7 +323,8 @@
                             </div>
                             <ul class="entry-meta">
                                 <li class="color">$19.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></li>
+                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                            class="icon-star-empty"></i> <i class="icon-star-empty"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -293,7 +339,9 @@
                             </div>
                             <ul class="entry-meta">
                                 <li class="color">$14.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></li>
+                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                            class="icon-star-half-full"></i> <i class="icon-star-empty"></i> <i
+                                            class="icon-star-empty"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -308,7 +356,8 @@
                             </div>
                             <ul class="entry-meta">
                                 <li class="color">$17.99</li>
-                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
+                                <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i
+                                            class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -317,26 +366,45 @@
 
             </div>
 
-            <div class="clear"></div><div class="line"></div>
+            <div class="clear"></div>
+            <div class="line"></div>
 
-            <div id="oc-clients-full" class="owl-carousel image-carousel carousel-widget" data-margin="30" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xxs="2" data-items-xs="3" data-items-sm="4" data-items-md="5" data-items-lg="7">
+            <div id="oc-clients-full" class="owl-carousel image-carousel carousel-widget" data-margin="30"
+                 data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xxs="2" data-items-xs="3"
+                 data-items-sm="4" data-items-md="5" data-items-lg="7">
 
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/1.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/2.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/3.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/4.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/5.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/6.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/7.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/8.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/9.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/10.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/11.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/12.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/13.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/14.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/15.png'); ?>" alt="Clients"></a></div>
-                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/18.png'); ?>" alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/1.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/2.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/3.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/4.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/5.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/6.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/7.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/8.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/9.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/10.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/11.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/12.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/13.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/14.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/15.png'); ?>"
+                                                      alt="Clients"></a></div>
+                <div class="oc-item"><a href="#"><img src="<?php echo Asset::images('clients/logo/18.png'); ?>"
+                                                      alt="Clients"></a></div>
 
             </div>
 
